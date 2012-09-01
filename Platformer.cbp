@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Platformer" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Platformer_debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-O2" />
+					<Add option="-O1" />
+					<Add option="-O" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-main-d" />
+					<Add library="sfml-system-d" />
+					<Add library="sfml-window-d" />
+					<Add library="sfml-graphics-d" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="Platformer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-march=core2" />
+					<Add option="-O3" />
+					<Add option="-O2" />
+					<Add option="-O1" />
+					<Add option="-O" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-main" />
+					<Add library="sfml-system" />
+					<Add library="sfml-window" />
+					<Add library="sfml-graphics" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="src\Camera.cpp" />
+		<Unit filename="src\Camera.hpp" />
+		<Unit filename="src\Game.cpp" />
+		<Unit filename="src\Game.hpp" />
+		<Unit filename="src\Level.cpp" />
+		<Unit filename="src\Level.hpp" />
+		<Unit filename="src\Main.cpp" />
+		<Unit filename="src\Object.cpp" />
+		<Unit filename="src\Object.hpp" />
+		<Unit filename="src\Player.cpp" />
+		<Unit filename="src\Player.hpp" />
+		<Unit filename="src\Render.cpp" />
+		<Unit filename="src\Render.hpp" />
+		<Unit filename="src\Tile.cpp" />
+		<Unit filename="src\Tile.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
