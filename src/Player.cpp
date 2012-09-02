@@ -144,7 +144,7 @@ void Player::Update()
 		}
 		else
 		{
-			Player::setVelocity(Player::getVelocity().x,Player::getVelocity().y + Player::gravity);
+			Player::setVelocity(Player::getVelocity().x,Player::getVelocity().y + (Player::gravity * Game::getDT()));
 			if(Player::getVelocity().y > Player::maxVelocity)
 				Player::setVelocity(Player::getVelocity().x,Player::maxVelocity);
 		}
