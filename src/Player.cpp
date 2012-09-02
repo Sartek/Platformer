@@ -14,17 +14,13 @@ Player::~Player()
 void Player::Initialize()
 {
 	Player::gravity = 16;
-	Player::onGround = 1;
+	Player::onGround = true;
 	Player::maxVelocity = 512;
 }
 
 bool Player::isOnGround()
 {
-	if(Player::onGround)
-		return true;
-	else
-		return false;
-
+	return Player::onGround;
 }
 
 void Player::MoveUp()
@@ -51,16 +47,6 @@ void Player::MoveRight()
 
 void Player::Update()
 {
-	if(Player::isOnGround())
-	{
-		Player::setVelocity(Player::getVelocity().x,0);
-	}
-	else
-	{
-		Player::setVelocity(Player::getVelocity().x,Player::getVelocity().y + Player::gravity);
-		if(Player::getVelocity().y > maxVelocity)
-			Player::setVelocity(Player::getVelocity().x,maxVelocity);
-	}
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
@@ -121,7 +107,7 @@ void Player::Update()
 		midright.height = Game::getLevel().getTileRect(midright.x,midright.y).height;
 
 		Tile bottomleft;
-		bottomleft.y = Player::getNextRect().top + Player::getNextRect().height - 1;
+		bottomleft.y = Player::getNextRect().top + Player::getNextRect().height;
 		bottomleft.x = Player::getNextRect().left;
 		bottomleft.y = (bottomleft.y - (bottomleft.y % 32))/32;
 		bottomleft.x = (bottomleft.x - (bottomleft.x % 32))/32;
@@ -132,7 +118,7 @@ void Player::Update()
 		bottomleft.height = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).height;
 
 		Tile bottomright;
-		bottomright.y = Player::getNextRect().top + Player::getNextRect().height - 1;
+		bottomright.y = Player::getNextRect().top + Player::getNextRect().height;
 		bottomright.x = Player::getNextRect().left + Player::getNextRect().width;
 		bottomright.y = (bottomright.y - (bottomright.y % 32))/32;
 		bottomright.x = (bottomright.x - (bottomright.x % 32))/32;
@@ -142,16 +128,6 @@ void Player::Update()
 		bottomright.width = Game::getLevel().getTileRect(bottomright.x,bottomright.y).width;
 		bottomright.height = Game::getLevel().getTileRect(bottomright.x,bottomright.y).height;
 
-		if(!topleft.solid && !topright.solid && !midleft.solid && !midright.solid && !bottomleft.solid && !bottomright.solid)
-		{
-			Player::setPosition(Player::getPosition().x + (Player::getVelocity().x * Game::getDT()),Player::getPosition().y + (Player::getVelocity().y * Game::getDT()));
-		}
-		else
-		{
-			Player::setVelocity(0,Player::getVelocity().y);
-			Player::setPosition(Player::getPosition().x,Player::getPosition().y + (Player::getVelocity().y * Game::getDT()));
-		}
-
 		if(bottomleft.solid or bottomright.solid)
 		{
 			Player::onGround = 1;
@@ -159,6 +135,28 @@ void Player::Update()
 		else
 		{
 			Player::onGround = 0;
+		}
+
+		if(Player::isOnGround())
+		{
+			if (Player::getVelocity().y > 0)
+				Player::setVelocity(Player::getVelocity().x,0);
+		}
+		else
+		{
+			Player::setVelocity(Player::getVelocity().x,Player::getVelocity().y + Player::gravity);
+			if(Player::getVelocity().y > Player::maxVelocity)
+				Player::setVelocity(Player::getVelocity().x,Player::maxVelocity);
+		}
+
+		if(!topleft.solid && !topright.solid && !midleft.solid && !midright.solid)
+		{
+			Player::setPosition(Player::getPosition().x + (Player::getVelocity().x * Game::getDT()),Player::getPosition().y + (Player::getVelocity().y * Game::getDT()));
+		}
+		else
+		{
+			Player::setVelocity(0,Player::getVelocity().y);
+			Player::setPosition(Player::getPosition().x,Player::getPosition().y + (Player::getVelocity().y * Game::getDT()));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Player::isOnGround())
