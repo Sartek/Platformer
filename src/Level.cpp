@@ -7,6 +7,10 @@ Level::Level()
 		for(unsigned int y = 0;y< Level::getHeight();y++)
 		{
 			switch(y) {
+				case 0:
+					Tiles[x][y] = 3;
+					TileCollisions[x][y] = true;
+					break;
 				case 13:
 					Tiles[x][y] = 2;
 					TileCollisions[x][y] = true;

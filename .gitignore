@@ -6,7 +6,7 @@
 *.pydevproject
 .project
 .metadata
-bin/**
+#bin/**
 tmp/**
 tmp/**/*
 *.tmp
@@ -189,9 +189,7 @@ Platformer.layout
 *.tlog
 *.rc
 *.manifest*
-
 obj\*
-bin\*
 *.exe
 *.imd
 *.map

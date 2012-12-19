@@ -7,8 +7,9 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="Platformer_debug" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="bin/Platformer_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
+				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -26,8 +27,9 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="Platformer" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="bin/Platformer" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -50,24 +52,25 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="src\Camera.cpp" />
-		<Unit filename="src\Camera.hpp" />
-		<Unit filename="src\Game.cpp" />
-		<Unit filename="src\Game.hpp" />
-		<Unit filename="src\Level.cpp" />
-		<Unit filename="src\Level.hpp" />
-		<Unit filename="src\Main.cpp" />
-		<Unit filename="src\Object.cpp" />
-		<Unit filename="src\Object.hpp" />
-		<Unit filename="src\Player.cpp" />
-		<Unit filename="src\Player.hpp" />
-		<Unit filename="src\Render.cpp" />
-		<Unit filename="src\Render.hpp" />
-		<Unit filename="src\Tile.cpp" />
-		<Unit filename="src\Tile.hpp" />
+		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Camera.hpp" />
+		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Game.hpp" />
+		<Unit filename="src/Level.cpp" />
+		<Unit filename="src/Level.hpp" />
+		<Unit filename="src/Main.cpp" />
+		<Unit filename="src/Object.cpp" />
+		<Unit filename="src/Object.hpp" />
+		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Player.hpp" />
+		<Unit filename="src/Render.cpp" />
+		<Unit filename="src/Render.hpp" />
+		<Unit filename="src/Tile.cpp" />
+		<Unit filename="src/Tile.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

@@ -14,7 +14,7 @@ int Game::Start()
 
 	Game::ft = sf::seconds(0);
 	Game::at = 0;
-	Game::dt =  1 / 120.0;
+	Game::dt =  1 / 240.0;
 
     Game::GameLoop();
     return 0;
