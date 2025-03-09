@@ -17,8 +17,7 @@ void Object::Load(float x,float y,float width,float height,unsigned int id)
 		Object::_isLoaded = true;
 		Object::spriteID = id;
 		Object::setPosition(x,y);
-		Object::rect.width = width;
-		Object::rect.height = height;
+		Object::rect.size = {width, height};
 		Object::setVelocity(0,0);
 		Object::Initialize();
 	}
@@ -36,15 +35,13 @@ void Object::Update()
 
 void Object::setPosition(float x,float y)
 {
-	Object::rect.left = x;
-	Object::rect.top = y;
+	Object::rect.position = {x, y};
 }
 
 sf::Vector2f Object::getPosition()
 {
 	sf::Vector2f Result;
-	Result.x = Object::rect.left;
-	Result.y = Object::rect.top;
+	Result = Object::rect.position;
 	return Result;
 }
 
@@ -72,10 +69,9 @@ sf::Rect<float> Object::getRect()
 sf::Rect<float> Object::getNextRect()
 {
 	sf::Rect<float> nextRect;
-	nextRect.top = Object::rect.top + Object::getVelocity().y * Game::getDT();
-	nextRect.left = Object::rect.left + Object::getVelocity().x * Game::getDT();
-	nextRect.width = Object::rect.width;
-	nextRect.height = Object::rect.height;
+	nextRect.position = { Object::rect.position.x + Object::getVelocity().x * Game::getDT()
+						, Object::rect.position.y + Object::getVelocity().y * Game::getDT() };
+	nextRect.size = Object::rect.size;
 
 	return nextRect;
 }

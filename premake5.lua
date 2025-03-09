@@ -1,5 +1,5 @@
-local libSFML = "../../libaries/c++/bin/SFML/lib"
-local includeSFML = "../../libaries/c++/bin/SFML/include"
+local libSFML = "../dependencies/SFML/build/lib"
+local includeSFML = "../dependencies/SFML/include"
 
 workspace "Platformer"
 	configurations { "Debug", "Release" }
@@ -11,7 +11,7 @@ project "Platformer"
 	language "C++"
 	targetdir "bin"
 	
-	files { "src/*.h", "src/*.cpp" }
+	files { "src/*.h", "src/*.cpp", "src/*.hpp" }
 	
 	filter "configurations:Debug"
 		defines { "DEBUG" }
@@ -24,7 +24,8 @@ project "Platformer"
 		
 	filter "configurations:Release"
 		defines { "NDEBUG" }
-		flags { "LinkTimeOptimization" }
+		flags {  }
+		linktimeoptimization "On"
 		optimize "Full"
 		links { "sfml-system", "sfml-window", "sfml-graphics" }
 		libdirs { libSFML }

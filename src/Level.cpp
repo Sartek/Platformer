@@ -57,11 +57,7 @@ int Level::getTile(int x,int y)
 
 sf::Rect<int> Level::getTileRect(int x,int y)
 {
-	sf::Rect<int> result;
-	result.top = y*32;
-	result.left = x*32;
-	result.width = 32;
-	result.height = 32;
+	sf::Rect<int> result({x*32,y*32},{32,32});
 	return result;
 }
 

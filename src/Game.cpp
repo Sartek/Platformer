@@ -2,13 +2,14 @@
 
 int Game::Start()
 {
-    Game::Window.create(sf::VideoMode(800,600,32),"Platformer",sf::Style::Close);
+    Game::Window.create(sf::VideoMode({800, 600} ,32) , "Platformer", sf::Style::Close);
     //Game::Window.setFramerateLimit(60);
     Game::exit = false;
     sf::Image icon;
     if (!icon.loadFromFile("resources/textures/icon.bmp"))
         return 1;
-    Game::Window.setIcon(32,32,icon.getPixelsPtr());
+    //Game::Window.setIcon(32,32,icon.getPixelsPtr());
+    Game::Window.setIcon(icon);
 
 	Game::player.Load(13.5*32,11.5*32,32,48,1);
 
@@ -69,10 +70,9 @@ Player& Game::getPlayer()
 
 void Game::PollEvent()
 {
-    sf::Event event;
-    while (Game::Window.pollEvent(event))
+    while (const std::optional event = Game::Window.pollEvent())
     {
-        if (event.type == sf::Event::Closed)
+        if (event->is<sf::Event::Closed>())
             Game::exit = true;
     }
 }
@@ -96,9 +96,11 @@ void Game::Renderer()
 		}
 	}
 
-	Game::render.Player();
+	//Game::render.Player();
 
 	Game::render.Hud();
+
+    Game::render.Player();
     Game::Window.display();
 }
 

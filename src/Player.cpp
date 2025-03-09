@@ -21,15 +21,15 @@ void Player::Initialize()
 bool Player::isOnGround()
 {
 	Tile bottomleft;
-	bottomleft.y = Player::getRect().top + Player::getNextRect().height;
-	bottomleft.x = Player::getRect().left;
+	bottomleft.y = Player::getRect().position.y + Player::getNextRect().size.y;
+	bottomleft.x = Player::getRect().position.x;
 	bottomleft.y = (bottomleft.y - (bottomleft.y % 32))/32;
 	bottomleft.x = (bottomleft.x - (bottomleft.x % 32))/32;
 	bottomleft.solid = Game::getLevel().isTileSolid(bottomleft.x,bottomleft.y);
 
 	Tile bottomright;
-	bottomright.y = Player::getRect().top + Player::getNextRect().height;
-	bottomright.x = Player::getRect().left + Player::getNextRect().width;
+	bottomright.y = Player::getRect().position.y + Player::getNextRect().size.y;
+	bottomright.x = Player::getRect().position.x + Player::getNextRect().size.x;
 	bottomright.y = (bottomright.y - (bottomright.y % 32))/32;
 	bottomright.x = (bottomright.x - (bottomright.x % 32))/32;
 	bottomright.solid = Game::getLevel().isTileSolid(bottomright.x,bottomright.y);
@@ -70,11 +70,11 @@ void Player::MoveRight()
 void Player::Update()
 {
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
     {
 		Player::MoveLeft();
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
     {
 		Player::MoveRight();
     }
@@ -83,81 +83,81 @@ void Player::Update()
         Player::setVelocity(0,Player::getVelocity().y);
     }
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && Player::isOnGround())
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && Player::isOnGround())
 	{
 		Player::MoveUp();
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !Player::isOnGround())
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && !Player::isOnGround())
 	{
 		Player::MoveDown();
 	}
 
 	{
 		Tile topleft;
-		topleft.y = Player::getNextRect().top;
-		topleft.x = Player::getNextRect().left;
+		topleft.y = Player::getNextRect().position.y;
+		topleft.x = Player::getNextRect().position.x;
 		topleft.y = (topleft.y - (topleft.y % 32))/32;
 		topleft.x = (topleft.x - (topleft.x % 32))/32;
 		topleft.solid = Game::getLevel().isTileSolid(topleft.x,topleft.y);
-		topleft.top = Game::getLevel().getTileRect(topleft.x,topleft.y).top;
-		topleft.left = Game::getLevel().getTileRect(topleft.x,topleft.y).left;
-		topleft.width = Game::getLevel().getTileRect(topleft.x,topleft.y).width;
-		topleft.height = Game::getLevel().getTileRect(topleft.x,topleft.y).height;
+		topleft.top = Game::getLevel().getTileRect(topleft.x,topleft.y).position.y;
+		topleft.left = Game::getLevel().getTileRect(topleft.x,topleft.y).position.x;
+		topleft.width = Game::getLevel().getTileRect(topleft.x,topleft.y).size.x;
+		topleft.height = Game::getLevel().getTileRect(topleft.x,topleft.y).size.y;
 
 		Tile topright;
-		topright.y = Player::getNextRect().top;
-		topright.x =Player::getNextRect().left + Player::getNextRect().width;
+		topright.y = Player::getNextRect().position.y;
+		topright.x = Player::getNextRect().position.x + Player::getNextRect().size.x;
 		topright.y = (topright.y - (topright.y % 32))/32;
 		topright.x = (topright.x - (topright.x % 32))/32;
 		topright.solid = Game::getLevel().isTileSolid(topright.x,topright.y);
-		topright.top = Game::getLevel().getTileRect(topright.x,topright.y).top;
-		topright.left = Game::getLevel().getTileRect(topright.x,topright.y).left;
-		topright.width = Game::getLevel().getTileRect(topright.x,topright.y).width;
-		topright.height = Game::getLevel().getTileRect(topright.x,topright.y).height;
+		topright.top = Game::getLevel().getTileRect(topright.x,topright.y).position.y;
+		topright.left = Game::getLevel().getTileRect(topright.x,topright.y).position.x;
+		topright.width = Game::getLevel().getTileRect(topright.x,topright.y).size.x;
+		topright.height = Game::getLevel().getTileRect(topright.x,topright.y).size.y;
 
 		Tile midleft;
-		midleft.y = Player::getNextRect().top + (Player::getNextRect().height / 2);
-		midleft.x = Player::getNextRect().left;
+		midleft.y = Player::getNextRect().position.y + (Player::getNextRect().size.y / 2);
+		midleft.x = Player::getNextRect().position.x;
 		midleft.y = (midleft.y - (midleft.y % 32))/32;
 		midleft.x = (midleft.x - (midleft.x % 32))/32;
 		midleft.solid = Game::getLevel().isTileSolid(midleft.x,midleft.y);
-		midleft.top = Game::getLevel().getTileRect(midleft.x,midleft.y).top;
-		midleft.left = Game::getLevel().getTileRect(midleft.x,midleft.y).left;
-		midleft.width = Game::getLevel().getTileRect(midleft.x,midleft.y).width;
-		midleft.height = Game::getLevel().getTileRect(midleft.x,midleft.y).height;
+		midleft.top = Game::getLevel().getTileRect(midleft.x,midleft.y).position.y;
+		midleft.left = Game::getLevel().getTileRect(midleft.x,midleft.y).position.x;
+		midleft.width = Game::getLevel().getTileRect(midleft.x,midleft.y).size.x;
+		midleft.height = Game::getLevel().getTileRect(midleft.x,midleft.y).size.y;
 
 		Tile midright;
-		midright.y = Player::getNextRect().top + (Player::getNextRect().height / 2);
-		midright.x = Player::getNextRect().left + Player::getNextRect().width;
+		midright.y = Player::getNextRect().position.y + (Player::getNextRect().size.y / 2);
+		midright.x = Player::getNextRect().position.x + Player::getNextRect().size.x;
 		midright.y = (midright.y - (midright.y % 32))/32;
 		midright.x = (midright.x - (midright.x % 32))/32;
 		midright.solid = Game::getLevel().isTileSolid(midright.x,midright.y);
-		midright.top = Game::getLevel().getTileRect(midright.x,midright.y).top;
-		midright.left = Game::getLevel().getTileRect(midright.x,midright.y).left;
-		midright.width = Game::getLevel().getTileRect(midright.x,midright.y).width;
-		midright.height = Game::getLevel().getTileRect(midright.x,midright.y).height;
+		midright.top = Game::getLevel().getTileRect(midright.x,midright.y).position.y;
+		midright.left = Game::getLevel().getTileRect(midright.x,midright.y).position.x;
+		midright.width = Game::getLevel().getTileRect(midright.x,midright.y).size.x;
+		midright.height = Game::getLevel().getTileRect(midright.x,midright.y).size.y;
 
 		Tile bottomleft;
-		bottomleft.y = Player::getNextRect().top + Player::getNextRect().height;
-		bottomleft.x = Player::getNextRect().left;
+		bottomleft.y = Player::getNextRect().position.y + Player::getNextRect().size.y;
+		bottomleft.x = Player::getNextRect().position.x;
 		bottomleft.y = (bottomleft.y - (bottomleft.y % 32))/32;
 		bottomleft.x = (bottomleft.x - (bottomleft.x % 32))/32;
 		bottomleft.solid = Game::getLevel().isTileSolid(bottomleft.x,bottomleft.y);
-		bottomleft.top = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).top;
-		bottomleft.left = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).left;
-		bottomleft.width = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).width;
-		bottomleft.height = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).height;
+		bottomleft.top = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).position.y;
+		bottomleft.left = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).position.x;
+		bottomleft.width = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).size.x;
+		bottomleft.height = Game::getLevel().getTileRect(bottomleft.x,bottomleft.y).size.y;
 
 		Tile bottomright;
-		bottomright.y = Player::getNextRect().top + Player::getNextRect().height;
-		bottomright.x = Player::getNextRect().left + Player::getNextRect().width;
+		bottomright.y = Player::getNextRect().position.y + Player::getNextRect().size.y;
+		bottomright.x = Player::getNextRect().position.x + Player::getNextRect().size.x;
 		bottomright.y = (bottomright.y - (bottomright.y % 32))/32;
 		bottomright.x = (bottomright.x - (bottomright.x % 32))/32;
 		bottomright.solid = Game::getLevel().isTileSolid(bottomright.x,bottomright.y);
-		bottomright.top = Game::getLevel().getTileRect(bottomright.x,bottomright.y).top;
-		bottomright.left = Game::getLevel().getTileRect(bottomright.x,bottomright.y).left;
-		bottomright.width = Game::getLevel().getTileRect(bottomright.x,bottomright.y).width;
-		bottomright.height = Game::getLevel().getTileRect(bottomright.x,bottomright.y).height;
+		bottomright.top = Game::getLevel().getTileRect(bottomright.x,bottomright.y).position.y;;
+		bottomright.left = Game::getLevel().getTileRect(bottomright.x,bottomright.y).position.x;
+		bottomright.width = Game::getLevel().getTileRect(bottomright.x,bottomright.y).size.x;
+		bottomright.height = Game::getLevel().getTileRect(bottomright.x,bottomright.y).size.y;
 
 		//if(bottomleft.solid or bottomright.solid)
 		//{
